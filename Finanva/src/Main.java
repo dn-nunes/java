@@ -25,11 +25,11 @@ public class Main {
             Nome do proprietário: %s
             Tipo de conta: %s
             Saldo inicial: R$%.2f
-            
             """, name, accountType, openingBalance);
 
         while (true) {
             System.out.println("""
+                
                 Operações:
                 
                 1 - Consultar saldo atual
@@ -48,23 +48,24 @@ public class Main {
                         === Saldo atual da conta ===
                         
                         Saldo: %.2f
-                        
                         """, openingBalance);
                     break;
                 case 2:
                     System.out.print("\n=== Recebimento ===\n");
                     System.out.print("Valor a receber: ");
-
-
                     double receiveValue = scanner.nextDouble();
+
                     openingBalance += receiveValue;
                     break;
                 case 3:
                     System.out.print("\n=== Transferência ===\n");
                     System.out.print("Valor a transferir: ");
-
                     double transferValue = scanner.nextDouble();
-                    openingBalance -= transferValue;
+
+                    if (transferValue <= openingBalance)
+                        openingBalance -= transferValue;
+                    else
+                        System.out.printf("\nErro: saldo insuficiente para a transferência. Saldo atual: R$%.2f.\n", openingBalance);
                     break;
                 case 0:
                     System.out.println("Fechando a aplicação...");
